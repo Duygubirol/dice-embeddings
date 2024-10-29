@@ -1,0 +1,1147 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dicee.dataset_classes &mdash; DICE Embeddings 0.1.3.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8775fe07" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/theme.css?v=ea877efc" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/theme_tweak.css?v=f0ad19f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8775fe07" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=c6726a90"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="dicee.eval_static_funcs" href="../eval_static_funcs/index.html" />
+    <link rel="prev" title="dicee.config" href="../config/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            DICE Embeddings
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/main.html">Dicee Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/main.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/main.html#download-knowledge-graphs">Download Knowledge Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/main.html#knowledge-graph-embedding-models">Knowledge Graph Embedding Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/main.html#how-to-train">How to Train</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/main.html#creating-an-embedding-vector-database">Creating an Embedding Vector Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/main.html#answering-complex-queries">Answering Complex Queries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/main.html#predicting-missing-links">Predicting Missing Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/main.html#downloading-pretrained-models">Downloading Pretrained Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/main.html#how-to-deploy">How to Deploy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/main.html#docker">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage/main.html#how-to-cite">How to cite</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">dicee</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../abstracts/index.html">dicee.abstracts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analyse_experiments/index.html">dicee.analyse_experiments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../callbacks/index.html">dicee.callbacks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../config/index.html">dicee.config</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">dicee.dataset_classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#dicee.dataset_classes.reload_dataset"><code class="docutils literal notranslate"><span class="pre">reload_dataset()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#dicee.dataset_classes.construct_dataset"><code class="docutils literal notranslate"><span class="pre">construct_dataset()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset"><code class="docutils literal notranslate"><span class="pre">BPE_NegativeSamplingDataset</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.train_set"><code class="docutils literal notranslate"><span class="pre">BPE_NegativeSamplingDataset.train_set</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.ordered_bpe_entities"><code class="docutils literal notranslate"><span class="pre">BPE_NegativeSamplingDataset.ordered_bpe_entities</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.num_bpe_entities"><code class="docutils literal notranslate"><span class="pre">BPE_NegativeSamplingDataset.num_bpe_entities</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.neg_ratio"><code class="docutils literal notranslate"><span class="pre">BPE_NegativeSamplingDataset.neg_ratio</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.num_datapoints"><code class="docutils literal notranslate"><span class="pre">BPE_NegativeSamplingDataset.num_datapoints</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.__len__"><code class="docutils literal notranslate"><span class="pre">BPE_NegativeSamplingDataset.__len__()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.__getitem__"><code class="docutils literal notranslate"><span class="pre">BPE_NegativeSamplingDataset.__getitem__()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.collate_fn"><code class="docutils literal notranslate"><span class="pre">BPE_NegativeSamplingDataset.collate_fn()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#dicee.dataset_classes.MultiLabelDataset"><code class="docutils literal notranslate"><span class="pre">MultiLabelDataset</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.MultiLabelDataset.train_set"><code class="docutils literal notranslate"><span class="pre">MultiLabelDataset.train_set</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.MultiLabelDataset.train_indices_target"><code class="docutils literal notranslate"><span class="pre">MultiLabelDataset.train_indices_target</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.MultiLabelDataset.target_dim"><code class="docutils literal notranslate"><span class="pre">MultiLabelDataset.target_dim</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.MultiLabelDataset.num_datapoints"><code class="docutils literal notranslate"><span class="pre">MultiLabelDataset.num_datapoints</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.MultiLabelDataset.torch_ordered_shaped_bpe_entities"><code class="docutils literal notranslate"><span class="pre">MultiLabelDataset.torch_ordered_shaped_bpe_entities</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.MultiLabelDataset.collate_fn"><code class="docutils literal notranslate"><span class="pre">MultiLabelDataset.collate_fn</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.MultiLabelDataset.__len__"><code class="docutils literal notranslate"><span class="pre">MultiLabelDataset.__len__()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.MultiLabelDataset.__getitem__"><code class="docutils literal notranslate"><span class="pre">MultiLabelDataset.__getitem__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#dicee.dataset_classes.MultiClassClassificationDataset"><code class="docutils literal notranslate"><span class="pre">MultiClassClassificationDataset</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.MultiClassClassificationDataset.train_data"><code class="docutils literal notranslate"><span class="pre">MultiClassClassificationDataset.train_data</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.MultiClassClassificationDataset.block_size"><code class="docutils literal notranslate"><span class="pre">MultiClassClassificationDataset.block_size</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.MultiClassClassificationDataset.num_of_data_points"><code class="docutils literal notranslate"><span class="pre">MultiClassClassificationDataset.num_of_data_points</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.MultiClassClassificationDataset.collate_fn"><code class="docutils literal notranslate"><span class="pre">MultiClassClassificationDataset.collate_fn</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.MultiClassClassificationDataset.__len__"><code class="docutils literal notranslate"><span class="pre">MultiClassClassificationDataset.__len__()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.MultiClassClassificationDataset.__getitem__"><code class="docutils literal notranslate"><span class="pre">MultiClassClassificationDataset.__getitem__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#dicee.dataset_classes.OnevsAllDataset"><code class="docutils literal notranslate"><span class="pre">OnevsAllDataset</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.OnevsAllDataset.train_data"><code class="docutils literal notranslate"><span class="pre">OnevsAllDataset.train_data</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.OnevsAllDataset.target_dim"><code class="docutils literal notranslate"><span class="pre">OnevsAllDataset.target_dim</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.OnevsAllDataset.collate_fn"><code class="docutils literal notranslate"><span class="pre">OnevsAllDataset.collate_fn</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.OnevsAllDataset.__len__"><code class="docutils literal notranslate"><span class="pre">OnevsAllDataset.__len__()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.OnevsAllDataset.__getitem__"><code class="docutils literal notranslate"><span class="pre">OnevsAllDataset.__getitem__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#dicee.dataset_classes.KvsAll"><code class="docutils literal notranslate"><span class="pre">KvsAll</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.KvsAll.train_data"><code class="docutils literal notranslate"><span class="pre">KvsAll.train_data</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.KvsAll.train_target"><code class="docutils literal notranslate"><span class="pre">KvsAll.train_target</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.KvsAll.label_smoothing_rate"><code class="docutils literal notranslate"><span class="pre">KvsAll.label_smoothing_rate</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.KvsAll.collate_fn"><code class="docutils literal notranslate"><span class="pre">KvsAll.collate_fn</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.KvsAll.__len__"><code class="docutils literal notranslate"><span class="pre">KvsAll.__len__()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.KvsAll.__getitem__"><code class="docutils literal notranslate"><span class="pre">KvsAll.__getitem__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#dicee.dataset_classes.AllvsAll"><code class="docutils literal notranslate"><span class="pre">AllvsAll</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.AllvsAll.train_data"><code class="docutils literal notranslate"><span class="pre">AllvsAll.train_data</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.AllvsAll.train_target"><code class="docutils literal notranslate"><span class="pre">AllvsAll.train_target</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.AllvsAll.label_smoothing_rate"><code class="docutils literal notranslate"><span class="pre">AllvsAll.label_smoothing_rate</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.AllvsAll.collate_fn"><code class="docutils literal notranslate"><span class="pre">AllvsAll.collate_fn</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.AllvsAll.target_dim"><code class="docutils literal notranslate"><span class="pre">AllvsAll.target_dim</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.AllvsAll.__len__"><code class="docutils literal notranslate"><span class="pre">AllvsAll.__len__()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.AllvsAll.__getitem__"><code class="docutils literal notranslate"><span class="pre">AllvsAll.__getitem__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#dicee.dataset_classes.KvsSampleDataset"><code class="docutils literal notranslate"><span class="pre">KvsSampleDataset</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.KvsSampleDataset.train_data"><code class="docutils literal notranslate"><span class="pre">KvsSampleDataset.train_data</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.KvsSampleDataset.num_entities"><code class="docutils literal notranslate"><span class="pre">KvsSampleDataset.num_entities</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.KvsSampleDataset.num_relations"><code class="docutils literal notranslate"><span class="pre">KvsSampleDataset.num_relations</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.KvsSampleDataset.neg_sample_ratio"><code class="docutils literal notranslate"><span class="pre">KvsSampleDataset.neg_sample_ratio</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.KvsSampleDataset.label_smoothing_rate"><code class="docutils literal notranslate"><span class="pre">KvsSampleDataset.label_smoothing_rate</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.KvsSampleDataset.collate_fn"><code class="docutils literal notranslate"><span class="pre">KvsSampleDataset.collate_fn</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.KvsSampleDataset.train_target"><code class="docutils literal notranslate"><span class="pre">KvsSampleDataset.train_target</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.KvsSampleDataset.__len__"><code class="docutils literal notranslate"><span class="pre">KvsSampleDataset.__len__()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.KvsSampleDataset.__getitem__"><code class="docutils literal notranslate"><span class="pre">KvsSampleDataset.__getitem__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#dicee.dataset_classes.NegSampleDataset"><code class="docutils literal notranslate"><span class="pre">NegSampleDataset</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.NegSampleDataset.neg_sample_ratio"><code class="docutils literal notranslate"><span class="pre">NegSampleDataset.neg_sample_ratio</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.NegSampleDataset.train_set"><code class="docutils literal notranslate"><span class="pre">NegSampleDataset.train_set</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.NegSampleDataset.length"><code class="docutils literal notranslate"><span class="pre">NegSampleDataset.length</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.NegSampleDataset.num_entities"><code class="docutils literal notranslate"><span class="pre">NegSampleDataset.num_entities</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.NegSampleDataset.num_relations"><code class="docutils literal notranslate"><span class="pre">NegSampleDataset.num_relations</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.NegSampleDataset.__len__"><code class="docutils literal notranslate"><span class="pre">NegSampleDataset.__len__()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.NegSampleDataset.__getitem__"><code class="docutils literal notranslate"><span class="pre">NegSampleDataset.__getitem__()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#dicee.dataset_classes.TriplePredictionDataset"><code class="docutils literal notranslate"><span class="pre">TriplePredictionDataset</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.TriplePredictionDataset.label_smoothing_rate"><code class="docutils literal notranslate"><span class="pre">TriplePredictionDataset.label_smoothing_rate</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.TriplePredictionDataset.neg_sample_ratio"><code class="docutils literal notranslate"><span class="pre">TriplePredictionDataset.neg_sample_ratio</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.TriplePredictionDataset.train_set"><code class="docutils literal notranslate"><span class="pre">TriplePredictionDataset.train_set</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.TriplePredictionDataset.length"><code class="docutils literal notranslate"><span class="pre">TriplePredictionDataset.length</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.TriplePredictionDataset.num_entities"><code class="docutils literal notranslate"><span class="pre">TriplePredictionDataset.num_entities</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.TriplePredictionDataset.num_relations"><code class="docutils literal notranslate"><span class="pre">TriplePredictionDataset.num_relations</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.TriplePredictionDataset.__len__"><code class="docutils literal notranslate"><span class="pre">TriplePredictionDataset.__len__()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.TriplePredictionDataset.__getitem__"><code class="docutils literal notranslate"><span class="pre">TriplePredictionDataset.__getitem__()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.TriplePredictionDataset.collate_fn"><code class="docutils literal notranslate"><span class="pre">TriplePredictionDataset.collate_fn()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#dicee.dataset_classes.CVDataModule"><code class="docutils literal notranslate"><span class="pre">CVDataModule</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.CVDataModule.train_set_idx"><code class="docutils literal notranslate"><span class="pre">CVDataModule.train_set_idx</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.CVDataModule.num_entities"><code class="docutils literal notranslate"><span class="pre">CVDataModule.num_entities</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.CVDataModule.num_relations"><code class="docutils literal notranslate"><span class="pre">CVDataModule.num_relations</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.CVDataModule.neg_sample_ratio"><code class="docutils literal notranslate"><span class="pre">CVDataModule.neg_sample_ratio</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.CVDataModule.batch_size"><code class="docutils literal notranslate"><span class="pre">CVDataModule.batch_size</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.CVDataModule.num_workers"><code class="docutils literal notranslate"><span class="pre">CVDataModule.num_workers</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.CVDataModule.train_dataloader"><code class="docutils literal notranslate"><span class="pre">CVDataModule.train_dataloader()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.CVDataModule.setup"><code class="docutils literal notranslate"><span class="pre">CVDataModule.setup()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.CVDataModule.transfer_batch_to_device"><code class="docutils literal notranslate"><span class="pre">CVDataModule.transfer_batch_to_device()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#dicee.dataset_classes.CVDataModule.prepare_data"><code class="docutils literal notranslate"><span class="pre">CVDataModule.prepare_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../eval_static_funcs/index.html">dicee.eval_static_funcs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../evaluator/index.html">dicee.evaluator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../executer/index.html">dicee.executer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../knowledge_graph/index.html">dicee.knowledge_graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../knowledge_graph_embeddings/index.html">dicee.knowledge_graph_embeddings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../models/index.html">dicee.models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../query_generator/index.html">dicee.query_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../read_preprocess_save_load_kg/index.html">dicee.read_preprocess_save_load_kg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sanity_checkers/index.html">dicee.sanity_checkers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../scripts/index.html">dicee.scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../static_funcs/index.html">dicee.static_funcs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../static_funcs_training/index.html">dicee.static_funcs_training</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../static_preprocess_funcs/index.html">dicee.static_preprocess_funcs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../trainer/index.html">dicee.trainer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#attributes">Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#package-contents">Package Contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">DICE Embeddings</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">dicee</a></li>
+      <li class="breadcrumb-item active">dicee.dataset_classes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/dicee/dataset_classes/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-dicee.dataset_classes">
+<span id="dicee-dataset-classes"></span><h1>dicee.dataset_classes<a class="headerlink" href="#module-dicee.dataset_classes" title="Link to this heading"></a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset" title="dicee.dataset_classes.BPE_NegativeSamplingDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BPE_NegativeSamplingDataset</span></code></a></p></td>
+<td><p>An abstract class representing a <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dicee.dataset_classes.MultiLabelDataset" title="dicee.dataset_classes.MultiLabelDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiLabelDataset</span></code></a></p></td>
+<td><p>An abstract class representing a <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dicee.dataset_classes.MultiClassClassificationDataset" title="dicee.dataset_classes.MultiClassClassificationDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiClassClassificationDataset</span></code></a></p></td>
+<td><p>Dataset for the 1vsALL training strategy</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dicee.dataset_classes.OnevsAllDataset" title="dicee.dataset_classes.OnevsAllDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OnevsAllDataset</span></code></a></p></td>
+<td><p>Dataset for the 1vsALL training strategy</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dicee.dataset_classes.KvsAll" title="dicee.dataset_classes.KvsAll"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KvsAll</span></code></a></p></td>
+<td><p>Creates a dataset for KvsAll training by inheriting from torch.utils.data.Dataset.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dicee.dataset_classes.AllvsAll" title="dicee.dataset_classes.AllvsAll"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AllvsAll</span></code></a></p></td>
+<td><p>Creates a dataset for AllvsAll training by inheriting from torch.utils.data.Dataset.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dicee.dataset_classes.KvsSampleDataset" title="dicee.dataset_classes.KvsSampleDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KvsSampleDataset</span></code></a></p></td>
+<td><p>KvsSample a Dataset:</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dicee.dataset_classes.NegSampleDataset" title="dicee.dataset_classes.NegSampleDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NegSampleDataset</span></code></a></p></td>
+<td><p>An abstract class representing a <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dicee.dataset_classes.TriplePredictionDataset" title="dicee.dataset_classes.TriplePredictionDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TriplePredictionDataset</span></code></a></p></td>
+<td><p>Triple Dataset</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dicee.dataset_classes.CVDataModule" title="dicee.dataset_classes.CVDataModule"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CVDataModule</span></code></a></p></td>
+<td><p>Create a Dataset for cross validation</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#dicee.dataset_classes.reload_dataset" title="dicee.dataset_classes.reload_dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reload_dataset</span></code></a>(path, form_of_labelling, ...)</p></td>
+<td><p>Reload the files from disk to construct the Pytorch dataset</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#dicee.dataset_classes.construct_dataset" title="dicee.dataset_classes.construct_dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_dataset</span></code></a>(→ torch.utils.data.Dataset)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="dicee.dataset_classes.reload_dataset">
+<span class="sig-prename descclassname"><span class="pre">dicee.dataset_classes.</span></span><span class="sig-name descname"><span class="pre">reload_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">form_of_labelling</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring_technique</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neg_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_smoothing_rate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#reload_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.reload_dataset" title="Link to this definition"></a></dt>
+<dd><p>Reload the files from disk to construct the Pytorch dataset</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dicee.dataset_classes.construct_dataset">
+<span class="sig-prename descclassname"><span class="pre">dicee.dataset_classes.</span></span><span class="sig-name descname"><span class="pre">construct_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_set</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_set</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordered_bpe_entities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_target_indices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_to_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relation_to_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">form_of_labelling</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scoring_technique</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neg_ratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_smoothing_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">byte_pair_encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.utils.data.Dataset</span></span></span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#construct_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.construct_dataset" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dicee.dataset_classes.BPE_NegativeSamplingDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dicee.dataset_classes.</span></span><span class="sig-name descname"><span class="pre">BPE_NegativeSamplingDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.LongTensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordered_shaped_bpe_entities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.LongTensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neg_ratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#BPE_NegativeSamplingDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
+<p>An abstract class representing a <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>.</p>
+<p>All datasets that represent a map from keys to data samples should subclass
+it. All subclasses should overwrite <a class="reference internal" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.__getitem__" title="dicee.dataset_classes.BPE_NegativeSamplingDataset.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a>, supporting fetching a
+data sample for a given key. Subclasses could also optionally overwrite
+<a class="reference internal" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.__len__" title="dicee.dataset_classes.BPE_NegativeSamplingDataset.__len__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__len__()</span></code></a>, which is expected to return the size of the dataset by many
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code> implementations and the default options
+of <code class="xref py py-class docutils literal notranslate"><span class="pre">DataLoader</span></code>. Subclasses could also
+optionally implement <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitems__()</span></code>, for speedup batched samples
+loading. This method accepts list of indices of samples of batch and returns
+list of samples.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataLoader</span></code> by default constructs an index
+sampler that yields integral indices.  To make it work with a map-style
+dataset with non-integral indices/keys, a custom sampler must be provided.</p>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.BPE_NegativeSamplingDataset.train_set">
+<span class="sig-name descname"><span class="pre">train_set</span></span><a class="headerlink" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.train_set" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.BPE_NegativeSamplingDataset.ordered_bpe_entities">
+<span class="sig-name descname"><span class="pre">ordered_bpe_entities</span></span><a class="headerlink" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.ordered_bpe_entities" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.BPE_NegativeSamplingDataset.num_bpe_entities">
+<span class="sig-name descname"><span class="pre">num_bpe_entities</span></span><a class="headerlink" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.num_bpe_entities" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.BPE_NegativeSamplingDataset.neg_ratio">
+<span class="sig-name descname"><span class="pre">neg_ratio</span></span><a class="headerlink" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.neg_ratio" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.BPE_NegativeSamplingDataset.num_datapoints">
+<span class="sig-name descname"><span class="pre">num_datapoints</span></span><a class="headerlink" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.num_datapoints" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.BPE_NegativeSamplingDataset.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#BPE_NegativeSamplingDataset.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.__len__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.BPE_NegativeSamplingDataset.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#BPE_NegativeSamplingDataset.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.__getitem__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.BPE_NegativeSamplingDataset.collate_fn">
+<span class="sig-name descname"><span class="pre">collate_fn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_shaped_bpe_triples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#BPE_NegativeSamplingDataset.collate_fn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.BPE_NegativeSamplingDataset.collate_fn" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiLabelDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dicee.dataset_classes.</span></span><span class="sig-name descname"><span class="pre">MultiLabelDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.LongTensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_indices_target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.LongTensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">torch_ordered_shaped_bpe_entities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">torch.LongTensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#MultiLabelDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.MultiLabelDataset" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
+<p>An abstract class representing a <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>.</p>
+<p>All datasets that represent a map from keys to data samples should subclass
+it. All subclasses should overwrite <a class="reference internal" href="#dicee.dataset_classes.MultiLabelDataset.__getitem__" title="dicee.dataset_classes.MultiLabelDataset.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a>, supporting fetching a
+data sample for a given key. Subclasses could also optionally overwrite
+<a class="reference internal" href="#dicee.dataset_classes.MultiLabelDataset.__len__" title="dicee.dataset_classes.MultiLabelDataset.__len__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__len__()</span></code></a>, which is expected to return the size of the dataset by many
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code> implementations and the default options
+of <code class="xref py py-class docutils literal notranslate"><span class="pre">DataLoader</span></code>. Subclasses could also
+optionally implement <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitems__()</span></code>, for speedup batched samples
+loading. This method accepts list of indices of samples of batch and returns
+list of samples.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataLoader</span></code> by default constructs an index
+sampler that yields integral indices.  To make it work with a map-style
+dataset with non-integral indices/keys, a custom sampler must be provided.</p>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiLabelDataset.train_set">
+<span class="sig-name descname"><span class="pre">train_set</span></span><a class="headerlink" href="#dicee.dataset_classes.MultiLabelDataset.train_set" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiLabelDataset.train_indices_target">
+<span class="sig-name descname"><span class="pre">train_indices_target</span></span><a class="headerlink" href="#dicee.dataset_classes.MultiLabelDataset.train_indices_target" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiLabelDataset.target_dim">
+<span class="sig-name descname"><span class="pre">target_dim</span></span><a class="headerlink" href="#dicee.dataset_classes.MultiLabelDataset.target_dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiLabelDataset.num_datapoints">
+<span class="sig-name descname"><span class="pre">num_datapoints</span></span><a class="headerlink" href="#dicee.dataset_classes.MultiLabelDataset.num_datapoints" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiLabelDataset.torch_ordered_shaped_bpe_entities">
+<span class="sig-name descname"><span class="pre">torch_ordered_shaped_bpe_entities</span></span><a class="headerlink" href="#dicee.dataset_classes.MultiLabelDataset.torch_ordered_shaped_bpe_entities" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiLabelDataset.collate_fn">
+<span class="sig-name descname"><span class="pre">collate_fn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dicee.dataset_classes.MultiLabelDataset.collate_fn" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiLabelDataset.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#MultiLabelDataset.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.MultiLabelDataset.__len__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiLabelDataset.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#MultiLabelDataset.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.MultiLabelDataset.__getitem__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiClassClassificationDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dicee.dataset_classes.</span></span><span class="sig-name descname"><span class="pre">MultiClassClassificationDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subword_units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#MultiClassClassificationDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.MultiClassClassificationDataset" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
+<p>Dataset for the 1vsALL training strategy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_set_idx</strong> – Indexed triples for the training.</p></li>
+<li><p><strong>entity_idxs</strong> – mapping.</p></li>
+<li><p><strong>relation_idxs</strong> – mapping.</p></li>
+<li><p><strong>form</strong> – <p>?</p>
+</p></li>
+<li><p><strong>num_workers</strong> – int for <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader">https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader</a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>torch.utils.data.Dataset</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiClassClassificationDataset.train_data">
+<span class="sig-name descname"><span class="pre">train_data</span></span><a class="headerlink" href="#dicee.dataset_classes.MultiClassClassificationDataset.train_data" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiClassClassificationDataset.block_size">
+<span class="sig-name descname"><span class="pre">block_size</span></span><a class="headerlink" href="#dicee.dataset_classes.MultiClassClassificationDataset.block_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiClassClassificationDataset.num_of_data_points">
+<span class="sig-name descname"><span class="pre">num_of_data_points</span></span><a class="headerlink" href="#dicee.dataset_classes.MultiClassClassificationDataset.num_of_data_points" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiClassClassificationDataset.collate_fn">
+<span class="sig-name descname"><span class="pre">collate_fn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dicee.dataset_classes.MultiClassClassificationDataset.collate_fn" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiClassClassificationDataset.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#MultiClassClassificationDataset.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.MultiClassClassificationDataset.__len__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.MultiClassClassificationDataset.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#MultiClassClassificationDataset.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.MultiClassClassificationDataset.__getitem__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dicee.dataset_classes.OnevsAllDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dicee.dataset_classes.</span></span><span class="sig-name descname"><span class="pre">OnevsAllDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_set_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_idxs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#OnevsAllDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.OnevsAllDataset" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
+<p>Dataset for the 1vsALL training strategy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_set_idx</strong> – Indexed triples for the training.</p></li>
+<li><p><strong>entity_idxs</strong> – mapping.</p></li>
+<li><p><strong>relation_idxs</strong> – mapping.</p></li>
+<li><p><strong>form</strong> – <p>?</p>
+</p></li>
+<li><p><strong>num_workers</strong> – int for <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader">https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader</a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>torch.utils.data.Dataset</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.OnevsAllDataset.train_data">
+<span class="sig-name descname"><span class="pre">train_data</span></span><a class="headerlink" href="#dicee.dataset_classes.OnevsAllDataset.train_data" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.OnevsAllDataset.target_dim">
+<span class="sig-name descname"><span class="pre">target_dim</span></span><a class="headerlink" href="#dicee.dataset_classes.OnevsAllDataset.target_dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.OnevsAllDataset.collate_fn">
+<span class="sig-name descname"><span class="pre">collate_fn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dicee.dataset_classes.OnevsAllDataset.collate_fn" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.OnevsAllDataset.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#OnevsAllDataset.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.OnevsAllDataset.__len__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.OnevsAllDataset.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#OnevsAllDataset.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.OnevsAllDataset.__getitem__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsAll">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dicee.dataset_classes.</span></span><span class="sig-name descname"><span class="pre">KvsAll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_set_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_idxs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relation_idxs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">form</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">store</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_smoothing_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#KvsAll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.KvsAll" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
+<dl class="simple">
+<dt>Creates a dataset for KvsAll training by inheriting from torch.utils.data.Dataset.</dt><dd><p>Let D denote a dataset for KvsAll training and be defined as D:= {(x,y)_i}_i ^N, where
+x: (h,r) is an unique tuple of an entity h in E and a relation r in R that has been seed in the input graph.
+y: denotes a multi-label vector in [0,1]^{<a href="#id3"><span class="problematic" id="id4">|E|</span></a>} is a binary label.</p>
+</dd>
+</dl>
+<p>orall y_i =1 s.t. (h r E_i) in KG</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>TODO</p>
+</div>
+<dl class="simple">
+<dt>train_set_idx<span class="classifier">numpy.ndarray</span></dt><dd><p>n by 3 array representing n triples</p>
+</dd>
+<dt>entity_idxs<span class="classifier">dictonary</span></dt><dd><p>string representation of an entity to its integer id</p>
+</dd>
+<dt>relation_idxs<span class="classifier">dictonary</span></dt><dd><p>string representation of a relation to its integer id</p>
+</dd>
+</dl>
+<p>self : torch.utils.data.Dataset</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">KvsAll</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">? array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</span>
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsAll.train_data">
+<span class="sig-name descname"><span class="pre">train_data</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dicee.dataset_classes.KvsAll.train_data" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsAll.train_target">
+<span class="sig-name descname"><span class="pre">train_target</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dicee.dataset_classes.KvsAll.train_target" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsAll.label_smoothing_rate">
+<span class="sig-name descname"><span class="pre">label_smoothing_rate</span></span><a class="headerlink" href="#dicee.dataset_classes.KvsAll.label_smoothing_rate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsAll.collate_fn">
+<span class="sig-name descname"><span class="pre">collate_fn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dicee.dataset_classes.KvsAll.collate_fn" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsAll.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#KvsAll.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.KvsAll.__len__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsAll.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#KvsAll.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.KvsAll.__getitem__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dicee.dataset_classes.AllvsAll">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dicee.dataset_classes.</span></span><span class="sig-name descname"><span class="pre">AllvsAll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_set_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_idxs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relation_idxs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_smoothing_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#AllvsAll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.AllvsAll" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
+<dl class="simple">
+<dt>Creates a dataset for AllvsAll training by inheriting from torch.utils.data.Dataset.</dt><dd><p>Let D denote a dataset for AllvsAll training and be defined as D:= {(x,y)_i}_i ^N, where
+x: (h,r) is a possible unique tuple of an entity h in E and a relation r in R. Hence N = <a href="#id5"><span class="problematic" id="id6">|E|</span></a> x <a href="#id7"><span class="problematic" id="id8">|R|</span></a>
+y: denotes a multi-label vector in [0,1]^{<a href="#id9"><span class="problematic" id="id10">|E|</span></a>} is a binary label.</p>
+</dd>
+</dl>
+<p>orall y_i =1 s.t. (h r E_i) in KG</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl class="simple">
+<dt>AllvsAll extends KvsAll via none existing (h,r). Hence, it adds data points that are labelled without 1s,</dt><dd><p>only with 0s.</p>
+</dd>
+</dl>
+</div>
+<dl class="simple">
+<dt>train_set_idx<span class="classifier">numpy.ndarray</span></dt><dd><p>n by 3 array representing n triples</p>
+</dd>
+<dt>entity_idxs<span class="classifier">dictonary</span></dt><dd><p>string representation of an entity to its integer id</p>
+</dd>
+<dt>relation_idxs<span class="classifier">dictonary</span></dt><dd><p>string representation of a relation to its integer id</p>
+</dd>
+</dl>
+<p>self : torch.utils.data.Dataset</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">AllvsAll</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
+<span class="go">? array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</span>
+</pre></div>
+</div>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.AllvsAll.train_data">
+<span class="sig-name descname"><span class="pre">train_data</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dicee.dataset_classes.AllvsAll.train_data" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.AllvsAll.train_target">
+<span class="sig-name descname"><span class="pre">train_target</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dicee.dataset_classes.AllvsAll.train_target" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.AllvsAll.label_smoothing_rate">
+<span class="sig-name descname"><span class="pre">label_smoothing_rate</span></span><a class="headerlink" href="#dicee.dataset_classes.AllvsAll.label_smoothing_rate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.AllvsAll.collate_fn">
+<span class="sig-name descname"><span class="pre">collate_fn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dicee.dataset_classes.AllvsAll.collate_fn" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.AllvsAll.target_dim">
+<span class="sig-name descname"><span class="pre">target_dim</span></span><a class="headerlink" href="#dicee.dataset_classes.AllvsAll.target_dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.AllvsAll.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#AllvsAll.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.AllvsAll.__len__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.AllvsAll.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#AllvsAll.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.AllvsAll.__getitem__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsSampleDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dicee.dataset_classes.</span></span><span class="sig-name descname"><span class="pre">KvsSampleDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_entities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neg_sample_ratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_smoothing_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#KvsSampleDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.KvsSampleDataset" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
+<blockquote>
+<div><dl class="simple">
+<dt>KvsSample a Dataset:</dt><dd><dl class="simple">
+<dt>D:= {(x,y)_i}_i ^N, where</dt><dd><p>. x:(h,r) is a unique h in E and a relation r in R and
+. y in [0,1]^{<a href="#id11"><span class="problematic" id="id12">|E|</span></a>} is a binary label.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl>
+<dt>orall y_i =1 s.t. (h r E_i) in KG</dt><dd><blockquote>
+<div><dl class="simple">
+<dt>At each mini-batch construction, we subsample(y), hence n</dt><dd><p><a href="#id13"><span class="problematic" id="id14">|new_y|</span></a> &lt;&lt; <a href="#id15"><span class="problematic" id="id16">|E|</span></a>
+new_y contains all 1’s if sum(y)&lt; neg_sample ratio
+new_y contains</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>train_set_idx</dt><dd><p>Indexed triples for the training.</p>
+</dd>
+<dt>entity_idxs</dt><dd><p>mapping.</p>
+</dd>
+<dt>relation_idxs</dt><dd><p>mapping.</p>
+</dd>
+<dt>form</dt><dd><p>?</p>
+</dd>
+<dt>store</dt><dd><p>?</p>
+</dd>
+<dt>label_smoothing_rate</dt><dd><p>?</p>
+</dd>
+</dl>
+<p>torch.utils.data.Dataset</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsSampleDataset.train_data">
+<span class="sig-name descname"><span class="pre">train_data</span></span><a class="headerlink" href="#dicee.dataset_classes.KvsSampleDataset.train_data" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsSampleDataset.num_entities">
+<span class="sig-name descname"><span class="pre">num_entities</span></span><a class="headerlink" href="#dicee.dataset_classes.KvsSampleDataset.num_entities" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsSampleDataset.num_relations">
+<span class="sig-name descname"><span class="pre">num_relations</span></span><a class="headerlink" href="#dicee.dataset_classes.KvsSampleDataset.num_relations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsSampleDataset.neg_sample_ratio">
+<span class="sig-name descname"><span class="pre">neg_sample_ratio</span></span><a class="headerlink" href="#dicee.dataset_classes.KvsSampleDataset.neg_sample_ratio" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsSampleDataset.label_smoothing_rate">
+<span class="sig-name descname"><span class="pre">label_smoothing_rate</span></span><a class="headerlink" href="#dicee.dataset_classes.KvsSampleDataset.label_smoothing_rate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsSampleDataset.collate_fn">
+<span class="sig-name descname"><span class="pre">collate_fn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#dicee.dataset_classes.KvsSampleDataset.collate_fn" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsSampleDataset.train_target">
+<span class="sig-name descname"><span class="pre">train_target</span></span><a class="headerlink" href="#dicee.dataset_classes.KvsSampleDataset.train_target" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsSampleDataset.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#KvsSampleDataset.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.KvsSampleDataset.__len__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.KvsSampleDataset.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#KvsSampleDataset.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.KvsSampleDataset.__getitem__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dicee.dataset_classes.NegSampleDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dicee.dataset_classes.</span></span><span class="sig-name descname"><span class="pre">NegSampleDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_entities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neg_sample_ratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#NegSampleDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.NegSampleDataset" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
+<p>An abstract class representing a <code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>.</p>
+<p>All datasets that represent a map from keys to data samples should subclass
+it. All subclasses should overwrite <a class="reference internal" href="#dicee.dataset_classes.NegSampleDataset.__getitem__" title="dicee.dataset_classes.NegSampleDataset.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a>, supporting fetching a
+data sample for a given key. Subclasses could also optionally overwrite
+<a class="reference internal" href="#dicee.dataset_classes.NegSampleDataset.__len__" title="dicee.dataset_classes.NegSampleDataset.__len__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__len__()</span></code></a>, which is expected to return the size of the dataset by many
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code> implementations and the default options
+of <code class="xref py py-class docutils literal notranslate"><span class="pre">DataLoader</span></code>. Subclasses could also
+optionally implement <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitems__()</span></code>, for speedup batched samples
+loading. This method accepts list of indices of samples of batch and returns
+list of samples.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataLoader</span></code> by default constructs an index
+sampler that yields integral indices.  To make it work with a map-style
+dataset with non-integral indices/keys, a custom sampler must be provided.</p>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.NegSampleDataset.neg_sample_ratio">
+<span class="sig-name descname"><span class="pre">neg_sample_ratio</span></span><a class="headerlink" href="#dicee.dataset_classes.NegSampleDataset.neg_sample_ratio" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.NegSampleDataset.train_set">
+<span class="sig-name descname"><span class="pre">train_set</span></span><a class="headerlink" href="#dicee.dataset_classes.NegSampleDataset.train_set" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.NegSampleDataset.length">
+<span class="sig-name descname"><span class="pre">length</span></span><a class="headerlink" href="#dicee.dataset_classes.NegSampleDataset.length" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.NegSampleDataset.num_entities">
+<span class="sig-name descname"><span class="pre">num_entities</span></span><a class="headerlink" href="#dicee.dataset_classes.NegSampleDataset.num_entities" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.NegSampleDataset.num_relations">
+<span class="sig-name descname"><span class="pre">num_relations</span></span><a class="headerlink" href="#dicee.dataset_classes.NegSampleDataset.num_relations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.NegSampleDataset.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#NegSampleDataset.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.NegSampleDataset.__len__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.NegSampleDataset.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#NegSampleDataset.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.NegSampleDataset.__getitem__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dicee.dataset_classes.TriplePredictionDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dicee.dataset_classes.</span></span><span class="sig-name descname"><span class="pre">TriplePredictionDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_entities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neg_sample_ratio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_smoothing_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#TriplePredictionDataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.TriplePredictionDataset" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></p>
+<blockquote>
+<div><p>Triple Dataset</p>
+<blockquote>
+<div><dl class="simple">
+<dt>D:= {(x)_i}_i ^N, where</dt><dd><p>. x:(h,r, t) in KG is a unique h in E and a relation r in R and
+. collact_fn =&gt; Generates negative triples</p>
+</dd>
+</dl>
+<p>collect_fn:</p>
+</div></blockquote>
+</div></blockquote>
+<p>orall (h,r,t) in G obtain, create negative triples{(h,r,x),(,r,t),(h,m,t)}</p>
+<blockquote>
+<div><blockquote>
+<div><p>y:labels are represented in torch.float16</p>
+</div></blockquote>
+<dl class="simple">
+<dt>train_set_idx</dt><dd><p>Indexed triples for the training.</p>
+</dd>
+<dt>entity_idxs</dt><dd><p>mapping.</p>
+</dd>
+<dt>relation_idxs</dt><dd><p>mapping.</p>
+</dd>
+<dt>form</dt><dd><p>?</p>
+</dd>
+<dt>store</dt><dd><p>?</p>
+</dd>
+</dl>
+<p>label_smoothing_rate</p>
+<p>collate_fn: batch:List[torch.IntTensor]
+Returns
+——-
+torch.utils.data.Dataset</p>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.TriplePredictionDataset.label_smoothing_rate">
+<span class="sig-name descname"><span class="pre">label_smoothing_rate</span></span><a class="headerlink" href="#dicee.dataset_classes.TriplePredictionDataset.label_smoothing_rate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.TriplePredictionDataset.neg_sample_ratio">
+<span class="sig-name descname"><span class="pre">neg_sample_ratio</span></span><a class="headerlink" href="#dicee.dataset_classes.TriplePredictionDataset.neg_sample_ratio" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.TriplePredictionDataset.train_set">
+<span class="sig-name descname"><span class="pre">train_set</span></span><a class="headerlink" href="#dicee.dataset_classes.TriplePredictionDataset.train_set" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.TriplePredictionDataset.length">
+<span class="sig-name descname"><span class="pre">length</span></span><a class="headerlink" href="#dicee.dataset_classes.TriplePredictionDataset.length" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.TriplePredictionDataset.num_entities">
+<span class="sig-name descname"><span class="pre">num_entities</span></span><a class="headerlink" href="#dicee.dataset_classes.TriplePredictionDataset.num_entities" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.TriplePredictionDataset.num_relations">
+<span class="sig-name descname"><span class="pre">num_relations</span></span><a class="headerlink" href="#dicee.dataset_classes.TriplePredictionDataset.num_relations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.TriplePredictionDataset.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#TriplePredictionDataset.__len__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.TriplePredictionDataset.__len__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.TriplePredictionDataset.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#TriplePredictionDataset.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.TriplePredictionDataset.__getitem__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.TriplePredictionDataset.collate_fn">
+<span class="sig-name descname"><span class="pre">collate_fn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#TriplePredictionDataset.collate_fn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.TriplePredictionDataset.collate_fn" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dicee.dataset_classes.CVDataModule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dicee.dataset_classes.</span></span><span class="sig-name descname"><span class="pre">CVDataModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">train_set_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_entities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_relations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neg_sample_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_workers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#CVDataModule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.CVDataModule" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">pytorch_lightning.LightningDataModule</span></code></p>
+<p>Create a Dataset for cross validation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_set_idx</strong> – Indexed triples for the training.</p></li>
+<li><p><strong>num_entities</strong> – entity to index mapping.</p></li>
+<li><p><strong>num_relations</strong> – relation to index mapping.</p></li>
+<li><p><strong>batch_size</strong> – int</p></li>
+<li><p><strong>form</strong> – <p>?</p>
+</p></li>
+<li><p><strong>num_workers</strong> – int for <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader">https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader</a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>?</p>
+</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.CVDataModule.train_set_idx">
+<span class="sig-name descname"><span class="pre">train_set_idx</span></span><a class="headerlink" href="#dicee.dataset_classes.CVDataModule.train_set_idx" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.CVDataModule.num_entities">
+<span class="sig-name descname"><span class="pre">num_entities</span></span><a class="headerlink" href="#dicee.dataset_classes.CVDataModule.num_entities" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.CVDataModule.num_relations">
+<span class="sig-name descname"><span class="pre">num_relations</span></span><a class="headerlink" href="#dicee.dataset_classes.CVDataModule.num_relations" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.CVDataModule.neg_sample_ratio">
+<span class="sig-name descname"><span class="pre">neg_sample_ratio</span></span><a class="headerlink" href="#dicee.dataset_classes.CVDataModule.neg_sample_ratio" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.CVDataModule.batch_size">
+<span class="sig-name descname"><span class="pre">batch_size</span></span><a class="headerlink" href="#dicee.dataset_classes.CVDataModule.batch_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dicee.dataset_classes.CVDataModule.num_workers">
+<span class="sig-name descname"><span class="pre">num_workers</span></span><a class="headerlink" href="#dicee.dataset_classes.CVDataModule.num_workers" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.CVDataModule.train_dataloader">
+<span class="sig-name descname"><span class="pre">train_dataloader</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torch.utils.data.DataLoader</span></span></span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#CVDataModule.train_dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.CVDataModule.train_dataloader" title="Link to this definition"></a></dt>
+<dd><p>An iterable or collection of iterables specifying training samples.</p>
+<p>For more information about multiple dataloaders, see this <span class="xref std std-ref">section</span>.</p>
+<p>The dataloader you return will not be reloaded unless you set
+<a href="#id1"><span class="problematic" id="id2">:paramref:`~pytorch_lightning.trainer.trainer.Trainer.reload_dataloaders_every_n_epochs`</span></a> to
+a positive integer.</p>
+<p>For data processing use the following pattern:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>download in <a class="reference internal" href="#dicee.dataset_classes.CVDataModule.prepare_data" title="dicee.dataset_classes.CVDataModule.prepare_data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare_data()</span></code></a></p></li>
+<li><p>process and split in <a class="reference internal" href="#dicee.dataset_classes.CVDataModule.setup" title="dicee.dataset_classes.CVDataModule.setup"><code class="xref py py-meth docutils literal notranslate"><span class="pre">setup()</span></code></a></p></li>
+</ul>
+</div></blockquote>
+<p>However, the above are only necessary for distributed processing.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>do not assign state in prepare_data</p>
+</div>
+<ul class="simple">
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">fit()</span></code></p></li>
+<li><p><a class="reference internal" href="#dicee.dataset_classes.CVDataModule.prepare_data" title="dicee.dataset_classes.CVDataModule.prepare_data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare_data()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#dicee.dataset_classes.CVDataModule.setup" title="dicee.dataset_classes.CVDataModule.setup"><code class="xref py py-meth docutils literal notranslate"><span class="pre">setup()</span></code></a></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Lightning tries to add the correct sampler for distributed and arbitrary hardware.
+There is no need to set it yourself.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.CVDataModule.setup">
+<span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#CVDataModule.setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.CVDataModule.setup" title="Link to this definition"></a></dt>
+<dd><p>Called at the beginning of fit (train + validate), validate, test, or predict. This is a good hook when you
+need to build models dynamically or adjust something about them. This hook is called on every process when
+using DDP.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stage</strong> – either <code class="docutils literal notranslate"><span class="pre">'fit'</span></code>, <code class="docutils literal notranslate"><span class="pre">'validate'</span></code>, <code class="docutils literal notranslate"><span class="pre">'test'</span></code>, or <code class="docutils literal notranslate"><span class="pre">'predict'</span></code></p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LitModel</span><span class="p">(</span><span class="o">...</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l1</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">prepare_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">download_data</span><span class="p">()</span>
+        <span class="n">tokenize</span><span class="p">()</span>
+
+        <span class="c1"># don&#39;t do this</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">something</span> <span class="o">=</span> <span class="k">else</span>
+
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stage</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">num_classes</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.CVDataModule.transfer_batch_to_device">
+<span class="sig-name descname"><span class="pre">transfer_batch_to_device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#CVDataModule.transfer_batch_to_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.CVDataModule.transfer_batch_to_device" title="Link to this definition"></a></dt>
+<dd><p>Override this hook if your <code class="xref py py-class docutils literal notranslate"><span class="pre">DataLoader</span></code> returns tensors wrapped in a custom data
+structure.</p>
+<p>The data types listed below (and any arbitrary nesting of them) are supported out of the box:</p>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code> or anything that implements <cite>.to(…)</cite></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p></li>
+</ul>
+<p>For anything else, you need to define how the data is moved to the target device (CPU, GPU, TPU, …).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This hook should only transfer the data and not modify it, nor should it move the data to
+any other device than the one passed in as argument (unless you know what you are doing).
+To check the current state of execution of this hook you can use
+<code class="docutils literal notranslate"><span class="pre">self.trainer.training/testing/validating/predicting</span></code> so that you can
+add different logic as per your requirement.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batch</strong> – A batch of data that needs to be transferred to a new device.</p></li>
+<li><p><strong>device</strong> – The target device as defined in PyTorch.</p></li>
+<li><p><strong>dataloader_idx</strong> – The index of the dataloader to which the batch belongs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A reference to the data on the new device.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">transfer_batch_to_device</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">dataloader_idx</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">CustomBatch</span><span class="p">):</span>
+        <span class="c1"># move all tensors in your custom data structure to the device</span>
+        <span class="n">batch</span><span class="o">.</span><span class="n">samples</span> <span class="o">=</span> <span class="n">batch</span><span class="o">.</span><span class="n">samples</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">batch</span><span class="o">.</span><span class="n">targets</span> <span class="o">=</span> <span class="n">batch</span><span class="o">.</span><span class="n">targets</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dataloader_idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># skip device transfer for the first dataloader or anything you wish</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">batch</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">transfer_batch_to_device</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">dataloader_idx</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">batch</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">move_data_to_device()</span></code></p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply_to_collection()</span></code></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dicee.dataset_classes.CVDataModule.prepare_data">
+<span class="sig-name descname"><span class="pre">prepare_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/dicee/dataset_classes.html#CVDataModule.prepare_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dicee.dataset_classes.CVDataModule.prepare_data" title="Link to this definition"></a></dt>
+<dd><p>Use this to download and prepare data. Downloading and saving data with multiple processes (distributed
+settings) will result in corrupted data. Lightning ensures this method is called only within a single process,
+so you can safely add your downloading logic within.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>DO NOT set state to the model (use <code class="docutils literal notranslate"><span class="pre">setup</span></code> instead)
+since this is NOT called on every device</p>
+</div>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prepare_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># good</span>
+    <span class="n">download_data</span><span class="p">()</span>
+    <span class="n">tokenize</span><span class="p">()</span>
+    <span class="n">etc</span><span class="p">()</span>
+
+    <span class="c1"># bad</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">split</span> <span class="o">=</span> <span class="n">data_split</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">some_state</span> <span class="o">=</span> <span class="n">some_other_state</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In a distributed environment, <code class="docutils literal notranslate"><span class="pre">prepare_data</span></code> can be called in two ways
+(using <span class="xref std std-ref">prepare_data_per_node</span>)</p>
+<ol class="arabic simple">
+<li><p>Once per node. This is the default and is only called on LOCAL_RANK=0.</p></li>
+<li><p>Once in total. Only called on GLOBAL_RANK=0.</p></li>
+</ol>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># DEFAULT</span>
+<span class="c1"># called once per node on LOCAL_RANK=0 of that node</span>
+<span class="k">class</span> <span class="nc">LitDataModule</span><span class="p">(</span><span class="n">LightningDataModule</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepare_data_per_node</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<span class="c1"># call on GLOBAL_RANK=0 (great for shared file systems)</span>
+<span class="k">class</span> <span class="nc">LitDataModule</span><span class="p">(</span><span class="n">LightningDataModule</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepare_data_per_node</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>This is called before requesting the dataloaders:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">prepare_data</span><span class="p">()</span>
+<span class="n">initialize_distributed</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">stage</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">train_dataloader</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">val_dataloader</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">test_dataloader</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">predict_dataloader</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../config/index.html" class="btn btn-neutral float-left" title="dicee.config" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../eval_static_funcs/index.html" class="btn btn-neutral float-right" title="dicee.eval_static_funcs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Caglar Demir.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

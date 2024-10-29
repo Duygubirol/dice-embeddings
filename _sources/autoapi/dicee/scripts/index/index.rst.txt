@@ -1,0 +1,22 @@
+dicee.scripts.index
+===================
+
+.. py:module:: dicee.scripts.index
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   dicee.scripts.index.get_default_arguments
+   dicee.scripts.index.main
+
+
+Module Contents
+---------------
+
+.. py:function:: get_default_arguments()
+
+.. py:function:: main()
+
